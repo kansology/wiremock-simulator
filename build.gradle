@@ -1,0 +1,69 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.kansal'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	wiremock
+}
+
+dependencies {
+	wiremock'com.github.tomakehurst:wiremock-standalone:2.18.0'
+}
+
+task copyJarToBuild(type: Copy) {
+	from configurations.wiremock.files
+	into 'build/run'
+}
+
+task runServerWithRecorder(dependsOn: 'copyJarToBuild') << {
+	javaexec {
+		main = "-jar"
+		args = [
+		        "build/run/wiremock-standalone-2.18.0.jar",
+				"--port=8081",
+				"--record-mapping",
+				"--verbose"
+		]
+	}
+}
+
+task runServer(dependsOn: 'copyJarToBuild') << {
+	javaexec {
+		main = "-jar"
+		args = [
+				"build/run/wiremock-standalone-2.18.0.jar",
+				"--port=8081"
+		]
+	}
+}
+
+task zip(type: Zip) {
+	from(configurations.wiremock.files) { into 'wiremock-simulator'}
+	from('__files') {into 'wiremock-simulator/__files'}
+	from('mappings') {into 'wiremock-simulator/mappings'}
+}
+
+artifacts {
+	archives zip
+}
