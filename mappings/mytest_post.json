@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/api/mytest",
+    "queryParameters": {
+      "param": {
+        "equalTo": "notjson"
+      }
+    },
+    "headers": {
+      "myHeaders": {
+        "equalTo": "headerValue"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": "mytest.json"
+  }
+}
