@@ -1,10 +1,20 @@
 {
   "request": {
     "method": "GET",
-    "url": "/api/mytest"
+    "urlPath": "/api/mytest",
+    "queryParameters": {
+      "param": {
+        "equalTo": "notjson"
+      }
+    },
+    "headers": {
+      "myHeaders": {
+        "equalTo": "headerValue"
+      }
+    }
   },
   "response": {
     "status": 200,
-    "bodyFileName": "mytest.json"
+    "body": "mytest.json"
   }
 }

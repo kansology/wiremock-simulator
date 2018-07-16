@@ -3,7 +3,7 @@
     "method": "POST",
     "urlPath": "/api/mytest",
     "bodyPatterns": [{
-      "equalToJson": "{\"bodyAtt\": \"reqAtt\"}"
+      "equalToJson": "{\"bodyAtt\": \"badValue\"}"
     }],
     "headers": {
       "myHeaders": {
@@ -12,7 +12,6 @@
     }
   },
   "response": {
-    "status": 200,
-    "bodyFileName": "mytest_post.json"
+    "status": 500
   }
 }

@@ -1,12 +1,10 @@
 {
   "request": {
-    "method": "GET",
+    "method": "POST",
     "urlPath": "/api/mytest",
-    "queryParameters": {
-      "param": {
-        "equalTo": "notjson"
-      }
-    },
+    "bodyPatterns": [{
+      "equalToJson": "{\"bodyAtt\": \"reqAtt\"}"
+    }],
     "headers": {
       "myHeaders": {
         "equalTo": "headerValue"
@@ -15,6 +13,6 @@
   },
   "response": {
     "status": 200,
-    "body": "mytest.json"
+    "bodyFileName": "mytest_post.json"
   }
 }
