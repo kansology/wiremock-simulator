@@ -5,7 +5,7 @@ stages:
 
 build:
   stage: build
-  script: ./gradlew zip
+  script: chmod +x gradlew && ./gradlew zip
   artifacts:
     paths:
       - build/distributions/wiremock-simulator*.zip
